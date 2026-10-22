@@ -4,8 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.wizardworld.navigation.Destinations
+import com.example.wizardworld.ui.screens.home.HomeScreen
+import com.example.wizardworld.ui.theme.WizardWorldTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,13 +24,29 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App()
+            WizardWorldTheme {
+                MainScreen()
+            }
         }
     }
 }
 
-@Preview
 @Composable
-fun AppAndroidPreview() {
-    App()
+fun MainScreen(
+    navController: NavHostController = rememberNavController(),
+) {
+    Scaffold(
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        modifier = Modifier.fillMaxSize(),
+    ) { paddingValues ->
+        NavHost(
+            navController = navController,
+            startDestination = Destinations.HomeRoute,
+            modifier = Modifier.padding(paddingValues),
+        ) {
+            composable<Destinations.HomeRoute> {
+                HomeScreen()
+            }
+        }
+    }
 }

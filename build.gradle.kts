@@ -15,9 +15,9 @@ allprojects {
 
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         filter {
-            exclude("**/build/**")
-            exclude("**/generated/**")
-            exclude { it.file.path.contains("generated") || it.file.path.contains("build") }
+            exclude { element ->
+                element.file.path.contains("build") || element.file.path.contains("generated")
+            }
         }
     }
 }
