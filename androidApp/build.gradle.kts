@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.compose.material3)
+    implementation(libs.koin.androidx.compose)
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.compose.uiToolingPreview)
